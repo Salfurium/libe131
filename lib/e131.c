@@ -34,7 +34,7 @@
 #include <arpa/inet.h>
 #endif
 
-#include "e131.h"
+#include <e131.h>
 
 /* E1.31 Public Constants */
 const uint16_t E131_DEFAULT_PORT = 5568;
