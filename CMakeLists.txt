@@ -25,7 +25,7 @@ if (NOT HAVE_PLATFORM_HEADERS)
     message(FATAL_ERROR "not all platform headers are present")
 endif()
 
-set(LIB_SOURCE_DIR "src/")
+set(LIB_SOURCE_DIR "lib/")
 set(LIB_PUBLIC_INCLUDE_DIR "include/")
 
 file(GLOB_RECURSE LIB_SOURCE_FILES "${LIB_SOURCE_DIR}*.c")
