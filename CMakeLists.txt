@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 
 INCLUDE (CheckIncludeFiles)
 
-project(e131)
+project(e131 C)
 
 set(HEADERS_UNIVERSAL "stdio.h;stdint.h;stdbool.h;sys/types.h;string.h;errno.h;inttypes.h")
 if(UNIX)
