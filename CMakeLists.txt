@@ -25,5 +25,27 @@ if (NOT HAVE_PLATFORM_HEADERS)
     message(FATAL_ERROR "not all platform headers are present")
 endif()
 
-add_library(${PROJECT_NAME} lib/e131.c)
-target_include_directories(e131 PUBLIC include/)
+set(LIB_SOURCE_DIR "src/")
+set(LIB_PUBLIC_INCLUDE_DIR "include/")
+
+file(GLOB_RECURSE LIB_SOURCE_FILES "${LIB_SOURCE_DIR}*.c")
+file(GLOB_RECURSE LIB_PRIVATE_INCLUDE_FILES "${LIB_SOURCE_DIR}*.h")
+file(GLOB_RECURSE LIB_PUBLIC_INCLUDE_FILES "${LIB_PUBLIC_INCLUDE_DIR}*.h")
+
+add_library(${PROJECT_NAME} ${LIB_SOURCE_FILES} ${LIB_PRIVATE_INCLUDE_FILES} ${LIB_PUBLIC_INCLUDE_FILES})
+
+target_include_directories(${PROJECT_NAME} PUBLIC ${LIB_PUBLIC_INCLUDE_DIR})
+target_include_directories(${PROJECT_NAME} PRIVATE ${LIB_SOURCE_DIR})
+
+set_target_properties(${PROJECT_NAME}
+    PROPERTIES
+    PUBLIC_HEADER "${LIB_PUBLIC_INCLUDE_FILES}"
+    PRIVATE_HEADER "${LIB_PRIVATE_INCLUDE_FILES}"
+    LINKER_LANGUAGE C
+)
+
+install(TARGETS ${PROJECT_NAME})
+
+if(BUILD_EXAMPLES)
+    add_subdirectory(examples)
+endif()
